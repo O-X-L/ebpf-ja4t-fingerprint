@@ -3,9 +3,8 @@
 ## Know-How
 
 You will need:
-* Docker to build the eBPF binary from C (*or install the build-dependencies as seen in the dockerfile locally..*)
-* [Go in the required version](https://go.dev/doc/install) (*see go.mod*)
-* Knowledge about how eBPF works
+* Docker for the build-dependencies (*or install Go and the dependencies locally..*)
+* Some knowledge about how eBPF works
 
 ----
 

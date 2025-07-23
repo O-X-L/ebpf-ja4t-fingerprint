@@ -34,7 +34,7 @@ But the JA4T algorithm has some usage-limitations - see: [FoxIO-LLC/ja4](https:/
 
 ## Contribute
 
-Contributions are welcome :
+Contributions are welcome!
 
 But please do not post any generic AI-slop.. thanks.
 
