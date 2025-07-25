@@ -14,6 +14,7 @@ docker run --rm -v "$(pwd)":/repo ebpf-go-builder /bin/bash -c "\
     bpftool btf dump file /sys/kernel/btf/vmlinux format c > /repo/build/vmlinux.h && \
     go mod tidy && \
     cd /repo/src/ && \
+    echo '### GENERATING ###' && \
     go generate && \
     bash /repo/scripts/build_archs.sh"
 

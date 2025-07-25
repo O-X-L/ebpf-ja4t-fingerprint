@@ -2,4 +2,4 @@ build/
 go.sum
 .venv/
 .idea/
-src/bpf_*
+bpf_bpfe[b|l].*

@@ -4,7 +4,7 @@
 #include <bpf/bpf_helpers.h> // For BPF helper functions
 #include <bpf/bpf_endian.h>
 
-char __license[] SEC("license") = "GPLv3";
+char __license[] SEC("license") = "GPL";
 
 #define MAX_MAP_ENTRIES 16
 

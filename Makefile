@@ -3,4 +3,4 @@ init:
 	go mod tidy
 
 build_all:
-	bash scripts/build.sh
+	bash scripts/build_all.sh

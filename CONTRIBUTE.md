@@ -17,13 +17,15 @@ You will need:
 
 ----
 
-### Build
+## Build
 
-Run: `make build_all` or `bash scripts/build.sh`
+DEV Build: `bash scripts/build_dev.sh <SRC-DIR>`
+
+Full Build: `make build_all` or `bash scripts/build_all.sh`
 
 We use docker to build the binaries as this provides a clean and reproducible build-environment.
 
-We use [cilium/ebpf bpf2go](https://ebpf-go.dev/guides/getting-started) to [cross-compile the sources](https://ebpf-go.dev/guides/portable-ebpf/#cross-compiling) for many distributions.
+We use [cilium/ebpf bpf2go](https://ebpf-go.dev/guides/getting-started) to [cross-compile the sources](https://ebpf-go.dev/guides/portable-ebpf/#cross-compiling).
 
 This is what happens in the build-process:
 
@@ -32,3 +34,11 @@ This is what happens in the build-process:
 3. Download go dependencies
 4. Using the [bpf2go tool](https://ebpf-go.dev/guides/portable-ebpf/) we generate the `src/bpf_bpfe[b|l].[o|go]` files (see: `//go:generate` in `main.go`)
 5. Then we build the binaries into `build/`
+
+----
+
+## Debug
+
+You can use `bpf_trace_printk(fmt, sizeof(fmt));` to temporarily enable debug-output. See: [eBPF Docs](https://docs.ebpf.io/linux/helper-function/bpf_trace_printk/)
+
+You can read it via: `sudo cat /sys/kernel/tracing/trace | grep bpf_trace_printk`
