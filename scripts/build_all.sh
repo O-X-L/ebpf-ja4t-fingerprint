@@ -6,7 +6,7 @@ cd "$(dirname "$0")/.."
 
 mkdir -p ./build/
 
-echo '### PREPARING.. ###'
+echo '### PREPARING ###'
 docker build -t ebpf-go-builder -f ./docker/Dockerfile_build .
 
 # see also: "//go:generate" in main.go

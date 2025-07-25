@@ -41,4 +41,35 @@ This is what happens in the build-process:
 
 You can use `bpf_trace_printk(fmt, sizeof(fmt));` to temporarily enable debug-output. See: [eBPF Docs](https://docs.ebpf.io/linux/helper-function/bpf_trace_printk/)
 
-You can read it via: `sudo cat /sys/kernel/tracing/trace | grep bpf_trace_printk`
+You can read it via: `sudo cat /sys/kernel/tracing/trace | grep BPF` (if you add prefix like `[eBPF]` to the message)
+
+NOTE: `bpf_trace_printk` can only take 3 format-parameters.
+
+**Examples:**
+
+* Format IPv4
+
+  ```c
+  const char log_ip4[] = "[eBPF] IP4: %pI4\n";
+  bpf_trace_printk(log_ip4, sizeof(log_ip4), &ip4->saddr);
+  // bpf_trace_printk: [eBPF] IP4: 127.0.0.1
+  ```
+
+* Format IPv6
+
+  ```c
+  const char log_ip6[] = "[eBPF] IP6: %pI6\n";
+  bpf_trace_printk(log_ip6, sizeof(log_ip6), &ip6->saddr);
+  // bpf_trace_printk: [eBPF] IP6: fe80:0000:0000:0000:c87f:acff:fe69:287a
+  ```
+
+* Write hex of bytes
+
+  ```c
+  const char log_ip6_p1[] = "[eBPF] IP6: Parts 1+2 (0x%x 0x%x)\n";
+  bpf_trace_printk(log_ip6_p1, sizeof(log_ip6_p1), bpf_ntohl(ip6o.addr[0]), bpf_ntohl(ip6o.addr[1]));
+  const char log_ip6_p2[] = "[eBPF] IP6: Parts 3+4 (0x%x 0x%x)\n";
+  bpf_trace_printk(log_ip6_p2, sizeof(log_ip6_p2), bpf_ntohl(ip6o.addr[2]), bpf_ntohl(ip6o.addr[3]));
+  // bpf_trace_printk: [eBPF] IP6: Parts 1+2 (0xfe800000 0x0)
+  // bpf_trace_printk: [eBPF] IP6: Parts 3+4 (0xc87facff 0xfe69287a)
+  ```
